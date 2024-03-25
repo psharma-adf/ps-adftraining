@@ -1,0 +1,17 @@
+{
+	"name": "pl2_gittest",
+	"properties": {
+		"activities": [
+			{
+				"name": "W_GitTest",
+				"type": "Wait",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"waitTimeInSeconds": 5
+				}
+			}
+		],
+		"annotations": []
+	}
+}
