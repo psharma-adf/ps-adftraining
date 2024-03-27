@@ -10,6 +10,15 @@
 		},
 		"dssqldestination_connectionString": {
 			"value": ""
+		},
+		"IntegrationRuntimeSSIS_properties_typeProperties_ssisProperties_catalogInfo_catalogServerEndpoint": {
+			"value": "pssqlserver.database.windows.net"
+		},
+		"IntegrationRuntimeSSIS_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminUserName": {
+			"value": "psharma"
+		},
+		"IntegrationRuntimeSSIS_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminPassword": {
+			"value": ""
 		}
 	}
 }
