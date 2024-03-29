@@ -1,0 +1,16 @@
+{
+	"name": "OnPrem",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"connectionString": "integrated security=False;data source=DESKTOP-OTMDTT7\\SQLEXPRESS;initial catalog=SSIS.ADF.Training;user id=psharma",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiIwM2JlMjZiMi0yZTdmLTQ3YjktYjI4Yi1hN2I3YThkNDYyYWQiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "SelfHostedIR",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}
