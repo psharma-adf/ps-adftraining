@@ -7,6 +7,10 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "adftrainingps"
 		},
+		"OnPrem_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'OnPrem'"
+		},
 		"dssourcefile_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'dssourcefile'"
@@ -319,47 +323,39 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/pl4_SSIS_Files_To_Table')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
+			"name": "[concat(parameters('factoryName'), '/OnPremDataset')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"activities": [
+				"linkedServiceName": {
+					"referenceName": "OnPrem",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
 					{
-						"name": "SSIS_Files_To_Table",
-						"type": "ExecuteSSISPackage",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"packageLocation": {
-								"packagePath": "ADFTraining/SSIS_ADF_AzureEnabled_PS/PA1_Files_ToTable.dtsx",
-								"type": "SSISDB"
-							},
-							"runtime": "x64",
-							"environmentPath": null,
-							"connectVia": {
-								"referenceName": "IntegrationRuntimeSSIS",
-								"type": "IntegrationRuntimeReference"
-							},
-							"loggingLevel": "Basic",
-							"projectConnectionManagers": {},
-							"packageConnectionManagers": {}
-						}
+						"name": "ProductID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ProductName",
+						"type": "varchar"
+					},
+					{
+						"name": "ProductCategoryID",
+						"type": "int",
+						"precision": 10
 					}
 				],
-				"policy": {
-					"elapsedTimeMetric": {}
-				},
-				"annotations": []
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Product"
+				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/integrationRuntimes/IntegrationRuntimeSSIS')]"
+				"[concat(variables('factoryId'), '/linkedServices/OnPrem')]"
 			]
 		},
 		{
@@ -568,6 +564,25 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/OnPrem')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"connectionString": "[parameters('OnPrem_connectionString')]"
+				},
+				"connectVia": {
+					"referenceName": "SelfHostedIR",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/SelfHostedIR')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/dssourcefile')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -621,6 +636,16 @@
 						"licenseType": "LicenseIncluded"
 					}
 				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SelfHostedIR')]",
+			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "SelfHosted",
+				"typeProperties": {}
 			},
 			"dependsOn": []
 		}

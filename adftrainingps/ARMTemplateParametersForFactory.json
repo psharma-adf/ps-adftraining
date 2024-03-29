@@ -5,6 +5,9 @@
 		"factoryName": {
 			"value": "adftrainingps"
 		},
+		"OnPrem_connectionString": {
+			"value": ""
+		},
 		"dssourcefile_connectionString": {
 			"value": ""
 		},

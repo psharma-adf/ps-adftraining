@@ -7,6 +7,10 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "adftrainingps"
 		},
+		"OnPrem_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'OnPrem'"
+		},
 		"dssourcefile_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'dssourcefile'"
@@ -58,6 +62,9 @@
 					},
 					"dssqldestination_connectionString": {
 						"value": "[parameters('dssqldestination_connectionString')]"
+					},
+					"OnPrem_connectionString": {
+						"value": "[parameters('OnPrem_connectionString')]"
 					},
 					"IntegrationRuntimeSSIS_properties_typeProperties_ssisProperties_catalogInfo_catalogServerEndpoint": {
 						"value": "[parameters('IntegrationRuntimeSSIS_properties_typeProperties_ssisProperties_catalogInfo_catalogServerEndpoint')]"
